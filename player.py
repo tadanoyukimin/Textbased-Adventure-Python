@@ -23,31 +23,52 @@ class Player():
     def check_inventory(self):
         print("This is your inventory.")
         print("------------------------")
-        print(f"{self.inventory}")
+        if len(self.inventory) == 0:
+            print("There is nothing in your inventory.")
+        else:
+            print(f"{self.inventory}")
 
     def check_equipment(self):
         print("This is your equipment.")
         print("------------------------")
         print(f"{self.equipment}")
 
-def equip_item():
+def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3] = Attack/Defense, [4] = Value
     player_answer = input("What item do you want to equip?> ").title()
-        # for equipment in player_character.inventory:
-        #     try:
-        #         if equipment == player_answer.title():
-        #             equipment_category = equipment.category
-        #             print(equipment_category)
-        #             if not player_character.equipment[equipment_category]:
-        #                 player_character.inventory.append(player_character.equipment[equipment_category])
-        #                 player_character.equipment[equipment_category] = equipment
-        #             elif player_character.equipment[equipment_category]:
-        #                 player_character.inventory.append(player_character.inventory[equipment_category])
-        #                 player_character.equipment[equipment_category] = equipment
-        #             player_character.attack
-
     for equipment in player_character.inventory:
-        print(equipment)
-        print(equipment in items.dict_item_stats)
+        try:
+            if player_answer == equipment:
+                if items.dict_item_stats[equipment][1] == "Weapon":
+                    if player_character.equipment["Weapon"] is None:
+                        player_character.equipment["Weapon"] = equipment
+                        player_character.inventory.pop(0)
+                    elif player_character.equipment["Weapon"]:
+                        player_character.inventory.append(player_character["Weapon"])
+                        player_character.equipment["Weapon"] = equipment
+                        player_character.inventory.pop(-1)
+                    player_character.attack += items.dict_item_stats[equipment][3]
+                    print(f"You have equipped a {equipment}.")
+                if items.dict_item_stats[equipment][1] == "Shield":
+                    if player_character.equipment["Shield"] is None:
+                        player_character.equipment["Shield"] = equipment
+                        player_character.inventory.pop(0)
+                    elif player_character.equipment["Shield"]:
+                        player_character.inventory.append(player_character["Shield"])
+                        player_character.equipment["Shield"] = equipment
+                        player_character.inventory.pop(-1)
+                    player_character.defense += items.dict_item_stats[equipment][3]
+                if items.dict_item_stats[equipment][1] == "Armor":
+                    if player_character.equipment["Armor"] is None:
+                        player_character.equipment["Armor"] = equipment
+                        player_character.inventory.pop(0)
+                    elif player_character.equipment["Armor"]:
+                        player_character.inventory.append(player_character["Armor"])
+                        player_character.equipment["Armor"] = equipment
+                        player_character.inventory.pop(-1)
+                    player_character.defense += items.dict_item_stats[equipment][3]
+        except AttributeError:
+            return f"You failed to equip {equipment}."      
+        
         # try:
         #     if player_answer is equipment.name.title():  
         #         if isinstance(player_answer, items.Weapon) is True:
@@ -115,7 +136,3 @@ def character_creation():
     return player_stats, player_name, player_class
 
 player_character = Player("Player", " ", 0, 1, 0, 0, 0)
-player_character.loot_item("Bronze Sword")
-player_character.check_inventory()
-equip_item()ffffddddd
-
