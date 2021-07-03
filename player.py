@@ -68,39 +68,6 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                     player_character.defense += items.dict_item_stats[equipment][3]
         except AttributeError:
             return f"You failed to equip {equipment}."      
-        
-        # try:
-        #     if player_answer is equipment.name.title():  
-        #         if isinstance(player_answer, items.Weapon) is True:
-        #             if player_character.equipment["Weapon"] is None:
-        #                 player_character.equipment["Weapon"] = equipment
-        #                 player_character.attack += equipment.attack
-        #                 return f"You have equipped {equipment}."
-        #             elif player_character.equipment["Weapon"]:
-        #                 player_character.inventory.append(player_character.equipment["Weapon"])
-        #                 player_character.equipment["Weapon"] = equipment
-        #                 player_character.attack += equipment.attack
-        #                 return f"You have equipped {equipment}."
-        #             else:
-        #                 return "There is nothing to equip"
-        #         if isinstance(player_answer, items.Armor) is True:
-        #             if player_character.equipment["Shield"] is None:
-        #                 player_character.inventory.append(player_character.equipment["Shield"])
-        #                 player_character.equipment["Shield"] = equipment
-        #             elif player_character.equipment["Shield"]:
-        #                 player_character.inventory.append(player_character.equipment["Shield"])
-        #                 player_character.equipment["Shield"] = equipment
-        #             player_character.defense += equipment.defense
-        #         if isinstance(player_answer, items.Armor) is True:
-        #             if player_character.equipment["Shield"] is None:
-        #                 player_character.inventory.append(player_character.equipment["Armor"])
-        #                 player_character.inventory["Armor"] = equipment
-        #             elif player_character.equipment["Armor"]:
-        #                 player_character.inventory.append(player_character.equipment["Armor"])
-        #                 player_character.inventory["Armor"] = equipment
-        #             player_character.defense += equipment.defense   
-        # except AttributeError:
-        #     return "Did not equip"
                     
 #class resources. Always HP, MP, ATK, DEF, INITIATIVE
 classlist = ["Knight", "Spellcaster", "Ranger"]
