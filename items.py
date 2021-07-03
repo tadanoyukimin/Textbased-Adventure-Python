@@ -50,4 +50,3 @@ dict_item_stats = {  #always [NAME, DAMAGE/DEFENSE, VALUE]
         bronze_armor.value
     ]
 }
-print(dict_item_stats)
