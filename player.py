@@ -117,5 +117,5 @@ def character_creation():
 player_character = Player("Player", " ", 0, 1, 0, 0, 0)
 player_character.loot_item("Bronze Sword")
 player_character.check_inventory()
-equip_item()
+equip_item()ffff
 
