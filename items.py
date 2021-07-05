@@ -34,6 +34,8 @@ bronze_sword = Weapon("Bronze Sword", "Weapon", "A sword made of bronze.", 2, 3)
 bronze_shield = Armor("Bronze Shield", "Shield", "A shield made of bronze.", 2, 2)
 bronze_armor = Armor("Bronze Armor", "Armor", "An armor made of bronze.", 2, 3)
 
+item_loot_table = ["Bronze Sword", "Bronze Shield", "Bronze Armor"]
+
 dict_item_stats = {  #always [NAME, CATEGORY, DESCRIPTION, DAMAGE/DEFENSE, VALUE]
     "Bronze Sword": [
         bronze_sword.name,
