@@ -35,4 +35,4 @@ slime = Enemy("Slime", 20, 3, 1, randomized_loot(), enemy_gold())
 
 
 #Boss list. TODO: BOSS LOOT TABLE
-balrog = Enemy("Balrog", 300, 50, 30, randomized_loot(), enemy_gold(), "A giant monster with two wings. I would run if I were you.")
+balrog = Enemy("Balrog", 300, 50, 30, randomized_loot(), boss_gold(), "A giant monster with two wings. I would run if I were you.")
