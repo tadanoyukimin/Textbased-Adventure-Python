@@ -1,4 +1,4 @@
-import items
+import Items
 
 class Player():
     def __init__(self, name, player, hp, mp, attack, defense, initiative):
@@ -38,7 +38,7 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
     for equipment in player_character.inventory:
         try:
             if player_answer == equipment:
-                if items.dict_item_stats[equipment][1] == "Weapon":
+                if Items.dict_item_stats[equipment][1] == "Weapon":
                     if player_character.equipment["Weapon"] is None:
                         player_character.equipment["Weapon"] = equipment
                         player_character.inventory.pop(0)
@@ -48,10 +48,10 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                         player_character.equipment["Weapon"] = equipment
                         player_character.inventory.pop(-1)
 
-                    player_character.attack += items.dict_item_stats[equipment][3]
+                    player_character.attack += Items.dict_item_stats[equipment][3]
                     print(f"You have equipped a {equipment}.")
 
-                if items.dict_item_stats[equipment][1] == "Shield":
+                if Items.dict_item_stats[equipment][1] == "Shield":
                     if player_character.equipment["Shield"] is None:
                         player_character.equipment["Shield"] = equipment
                         player_character.inventory.pop(0)
@@ -61,10 +61,10 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                         player_character.equipment["Shield"] = equipment
                         player_character.inventory.pop(-1)
 
-                    player_character.defense += items.dict_item_stats[equipment][3]
+                    player_character.defense += Items.dict_item_stats[equipment][3]
                     print(f"You have equipped a {equipment}.")
 
-                if items.dict_item_stats[equipment][1] == "Armor":
+                if Items.dict_item_stats[equipment][1] == "Armor":
 
                     if player_character.equipment["Armor"] is None:
                         player_character.equipment["Armor"] = equipment
@@ -75,7 +75,7 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                         player_character.equipment["Armor"] = equipment
                         player_character.inventory.pop(-1)
 
-                    player_character.defense += items.dict_item_stats[equipment][3]
+                    player_character.defense += Items.dict_item_stats[equipment][3]
                     print(f"You have equipped a {equipment}.")
 
         except AttributeError:
@@ -87,17 +87,17 @@ def unequip_item():
     equipped_item = input("What do you want to unequip? (Please specify item name.)\n> ").title()
 
     if equipped_item == player_character.equipment["Weapon"]:
-        player_character.attack -= items.dict_item_stats[equipped_item][3]
+        player_character.attack -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Weapon"] = None
 
     elif equipped_item == player_character.equipment["Shield"]:
-        player_character.defense -= items.dict_item_stats[equipped_item][3]
+        player_character.defense -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Shield"] = None
 
     elif equipped_item == player_character.equipment["Armor"]:
-        player_character.defense -= items.dict_item_stats[equipped_item][3]
+        player_character.defense -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Armor"] = None
 
