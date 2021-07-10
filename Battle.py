@@ -43,7 +43,7 @@ def battle(enemy):
                 print("You died. GAME OVER.")
                 exit()
             else:
-                player_action = input("What do you want to do?\n1. Attack\n2. Guard\n3. Flee\n>")
+                player_action = int(input("What do you want to do?\n1. Attack\n2. Guard\n3. Flee\n>"))
                 if player_action == 1:
                     player_attack = attack()
                     damage_enemy(enemy, player_attack)
