@@ -26,6 +26,12 @@ def enemy_attack(enemy):
     Player.player_character.hp -= adjusted_enemy_damage
     print(f"You got hit for {adjusted_enemy_damage}! You have {Player.player_character.hp} HP.")
 
+def encounter_check():
+    no_encounter = Player.player_character.initiative
+    if random.randint(0, 10) > no_encounter:
+        print("You hear slight rumbling in the distance...")
+        print("You have been attacked!")
+
 def battle(enemy):
     in_combat = True
     while in_combat:

@@ -2,6 +2,7 @@ import Items
 import copy
 import DungeonMap
 import numpy as np
+import random
 
 class Player():
     def __init__(self, name, player, hp, mp, attack, defense, initiative):
