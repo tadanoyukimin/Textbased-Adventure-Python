@@ -15,7 +15,7 @@ import numpy as np
 # max_arr_m = list(map(max, zip(*arr_m))) # this will give the list that has the biggest integer
 # print(max_arr_m)
 # print(max(max_arr_m))
-PLAYER_START_POS = 0
+
 dungeon_map_start = [0, 1, 2]
 dungeon_map_second = np.arange(12).reshape(4, 3)
 dungeon_map_final = np.arange(6)

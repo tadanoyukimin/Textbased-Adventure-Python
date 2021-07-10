@@ -1,4 +1,7 @@
 import Items
+import copy
+import DungeonMap
+import numpy as np
 
 class Player():
     def __init__(self, name, player, hp, mp, attack, defense, initiative):
@@ -16,7 +19,9 @@ class Player():
             "Armor": None
         }
         self.gold = 0
-    
+        self.floor = 0
+        self.position = 0
+
     def loot_item(self, item):
         self.inventory.append(item)
 
@@ -32,6 +37,23 @@ class Player():
         print("This is your equipment.")
         print("------------------------")
         print(f"{self.equipment}")
+
+#  Player action? 
+    def move(self):
+        current_position = DungeonMap.dungeon_map_second[self.floor][self.position]
+        #  This refers to [[0, 1, 2,]], [[0]]
+        #  self.position should refer to the index within the nested list, not the nested list itself.
+        if self.position == 2:
+            self.floor += 1
+            self.position = 0 
+        else:
+            self.position += 1
+
+    def check_map(self):
+        current_position = DungeonMap.dungeon_map_second[self.floor][self.position]
+        print(f"Your current position is {current_position}.")
+        map_copy = copy.copy(DungeonMap.dungeon_map_second)
+        return f"The map is \n{map_copy}."
 
 def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3] = Attack/Defense, [4] = Value
     player_answer = input("What item do you want to equip?> ").title()
