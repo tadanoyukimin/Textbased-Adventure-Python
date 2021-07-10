@@ -23,16 +23,14 @@ def boss_gold():
 def randomized_loot():
     dice_roll = random.randint(0, 20)
     if dice_roll > 10:
-        randomized_loot_index = random.randint(0, len(Items.item_loot_table))
+        randomized_loot_index = random.randint(0, (len(Items.item_loot_table) - 1))
         return Items.item_loot_table[randomized_loot_index]
-    else:
-        print("The enemy dropped nothing.")
 
 
 #enemy list
 skeleton = Enemy("Skeleton", 30, 5, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.")
 zombie = Enemy("Zombie", 25, 5, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.")
-slime = Enemy("Slime", 20, 3, 1, 3, randomized_loot(), enemy_gold())
+slime = Enemy("Slime", 20, 3, 1, 3, randomized_loot(), enemy_gold(), "A glob of monster liquid.")
 
 
 #Boss list. TO DO: BOSS LOOT TABLE

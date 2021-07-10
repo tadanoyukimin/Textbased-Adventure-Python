@@ -134,7 +134,7 @@ spellcaster_stats = [15, 30, 8, 4, 3]
 ranger_stats = [18, 15, 6, 7, 5]
 
 def character_creation():
-    player_stats = [0, 0, 0, 0, 0]  #HP, MP, ATK, DEF, INITIATIVE
+    player_stats = [50, 0, 0, 0, 0]  #HP, MP, ATK, DEF, INITIATIVE. Base HP = 50
     player_name = input("UNKNOWN VOICE: Please enter your name...:\n")
 
     if player_name.strip() == "":
@@ -149,10 +149,25 @@ def character_creation():
         if player_class in valid_class_choices:
             if player_class == "Knight":
                 player_stats = knight_stats
+                player_character.hp = player_stats[0]
+                player_character.mp = player_stats[1]
+                player_character.attack = player_stats[2]
+                player_character.defense = player_stats[3]
+                player_character.initiative = player_stats[4]
             elif player_class == "Spellcaster":
                 player_stats = spellcaster_stats
+                player_character.hp = player_stats[0]
+                player_character.mp = player_stats[1]
+                player_character.attack = player_stats[2]
+                player_character.defense = player_stats[3]
+                player_character.initiative = player_stats[4]
             elif player_class == "Ranger":
                 player_stats = ranger_stats
+                player_character.hp = player_stats[0]
+                player_character.mp = player_stats[1]
+                player_character.attack = player_stats[2]
+                player_character.defense = player_stats[3]
+                player_character.initiative = player_stats[4]
             valid_choice = True
         else:
             print("Invalid class choice. Please try again.")

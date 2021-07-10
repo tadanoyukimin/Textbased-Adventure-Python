@@ -28,15 +28,18 @@ def enemy_attack(enemy):
 
 def encounter_check():
     no_encounter = Player.player_character.initiative
-    if random.randint(0, 10) > no_encounter:
+    yes_encounter = random.randint(0, 10)
+    if yes_encounter > no_encounter:
         print("You hear slight rumbling in the distance...")
         print("You have been attacked!")
+        return yes_encounter
 
 def battle(enemy):
     in_combat = True
     while in_combat:
         while enemy.hp > 0:
             if Player.player_character.hp <=0:
+                print(Player.player_character.hp)
                 print("You died. GAME OVER.")
                 exit()
             else:
