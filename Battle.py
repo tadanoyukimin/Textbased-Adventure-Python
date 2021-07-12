@@ -13,18 +13,20 @@ def defend():
 def damage_enemy(encountered_enemy, player_damage):
     adjusted_damage = player_damage - encountered_enemy.defense
     encountered_enemy.hp -= adjusted_damage
-    print(f"You hit {encountered_enemy} for {adjusted_damage}!")
+    print(f"You hit the {encountered_enemy.name} for {adjusted_damage} damage!")
 
 def guard(encountered_enemy, player_defense):
     adjusted_enemy_damage = encountered_enemy.attack - player_defense
     Player.player_character.hp -= adjusted_enemy_damage
-    print(f"You got hit for {adjusted_enemy_damage} while guarding. You have {Player.player_character.hp} HP.")
+    if adjusted_enemy_damage <= 0:
+        adjusted_enemy_damage = 0
+    print(f"You got hit for {adjusted_enemy_damage} while guarding. You have {Player.player_character.hp} HP left.")
 
 def enemy_attack(enemy):
     enemy_damage = enemy.attack
     adjusted_enemy_damage = enemy_damage - Player.player_character.defense
     Player.player_character.hp -= adjusted_enemy_damage
-    print(f"You got hit for {adjusted_enemy_damage}! You have {Player.player_character.hp} HP.")
+    print(f"You got hit for {adjusted_enemy_damage}! You have {Player.player_character.hp} HP left.")
 
 def encounter_check():
     no_encounter = Player.player_character.initiative
@@ -43,7 +45,7 @@ def battle(enemy):
                 print("You died. GAME OVER.")
                 exit()
             else:
-                player_action = int(input("What do you want to do?\n1. Attack\n2. Guard\n3. Flee\n>"))
+                player_action = int(input("What do you want to do?\n1. Attack\n2. Guard\n3. Flee\n> "))
                 if player_action == 1:
                     player_attack = attack()
                     damage_enemy(enemy, player_attack)

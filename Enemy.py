@@ -27,10 +27,10 @@ def randomized_loot():
         return Items.item_loot_table[randomized_loot_index]
 
 
-#enemy list
-skeleton = Enemy("Skeleton", 30, 5, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.")
-zombie = Enemy("Zombie", 25, 5, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.")
-slime = Enemy("Slime", 20, 3, 1, 3, randomized_loot(), enemy_gold(), "A glob of monster liquid.")
+#enemy list. HP, ATK, DEF, INI
+skeleton = Enemy("Skeleton", 30, 18, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.")
+zombie = Enemy("Zombie", 25, 20, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.")
+slime = Enemy("Slime", 20, 10, 1, 3, randomized_loot(), enemy_gold(), "A glob of monster liquid.")
 
 
 #Boss list. TO DO: BOSS LOOT TABLE
