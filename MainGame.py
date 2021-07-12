@@ -5,6 +5,8 @@ import Battle
 import Enemy
 import Items
 import RoomDescription
+import random
+
 
 def start_game():
     player_stat_info, player_name = Player.character_creation()
@@ -19,19 +21,37 @@ def start_game():
 
 def player_menu():
     while True:
-        player_answer = int(input("What do you want to do?\n1: Move\n2: Examine\n3: Equip item\n4: Unequip item\n5: Inventory\n6: Save\n: Load\n>: "))
+        player_answer = int(input("What do you want to do?\n1: Move\n2: Examine\n3: Equip item\n4: Unequip item\n5: Inventory\n6: Save\n7: Load\n>: "))
         if player_answer == 1:
             Player.player_character.move()
+            if Player.player_character.position == 12:
+                Battle.battle(Enemy.balrog)
             Battle.encounter_check()
+            enemy_num_encountered = random.randint(0, 3)
+            if Battle.encounter_check() and enemy_num_encountered <= 1:
+                Battle.battle(Enemy.slime)
+            elif Battle.encounter_check() and enemy_num_encountered == 2:
+                Battle.battle(Enemy.skeleton)
+            elif Battle.encounter_check() and enemy_num_encountered == 3:
+                Battle.battle(Enemy.zombie)
         elif player_answer == 2:
             RoomDescription.random_room_description()
+            examined = True
+            if examined:
+                return "You have already examined this room."
         elif player_answer == 3:
             Player.equip_item()
         elif player_answer == 4:
             Player.unequip_item()
         elif player_answer == 5:
-            save_game()
+            if not Player.player_character.inventory():
+                return "You have nothing in your inventory!"
+            else:
+                Player.player_character.check_inventory()
         elif player_answer == 6:
+            save_game()
+            print("You have successfully saved your game.")
+        elif player_answer == 7:
             load_game()
         else:
             "Please select from options provided."  
