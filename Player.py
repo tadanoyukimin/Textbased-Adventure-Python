@@ -129,9 +129,9 @@ def unequip_item():
    
 #class resources. Always HP, MP, ATK, DEF, INITIATIVE
 classlist = ["Knight", "Spellcaster", "Ranger"]
-knight_stats = [20, 10, 4, 8, 3]
+knight_stats = [20, 10, 10, 8, 3]
 spellcaster_stats = [15, 30, 8, 4, 3]
-ranger_stats = [18, 15, 6, 7, 5]
+ranger_stats = [18, 15, 15, 7, 5]
 
 def character_creation():
     player_stats = [50, 0, 0, 0, 0]  #HP, MP, ATK, DEF, INITIATIVE. Base HP = 50
@@ -149,21 +149,21 @@ def character_creation():
         if player_class in valid_class_choices:
             if player_class == "Knight":
                 player_stats = knight_stats
-                player_character.hp = player_stats[0]
+                player_character.hp += player_stats[0]
                 player_character.mp = player_stats[1]
                 player_character.attack = player_stats[2]
                 player_character.defense = player_stats[3]
                 player_character.initiative = player_stats[4]
             elif player_class == "Spellcaster":
                 player_stats = spellcaster_stats
-                player_character.hp = player_stats[0]
+                player_character.hp += player_stats[0]
                 player_character.mp = player_stats[1]
                 player_character.attack = player_stats[2]
                 player_character.defense = player_stats[3]
                 player_character.initiative = player_stats[4]
             elif player_class == "Ranger":
                 player_stats = ranger_stats
-                player_character.hp = player_stats[0]
+                player_character.hp += player_stats[0]
                 player_character.mp = player_stats[1]
                 player_character.attack = player_stats[2]
                 player_character.defense = player_stats[3]
@@ -172,7 +172,6 @@ def character_creation():
         else:
             print("Invalid class choice. Please try again.")
     print("And so your adventure begins...")
-
     return player_stats, player_name, player_class
-
+    
 player_character = Player("Player", " ", 0, 1, 0, 0, 0)
