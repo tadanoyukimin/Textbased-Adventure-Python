@@ -46,7 +46,7 @@ class Player():
         #  self.position should refer to the index within the nested list, not the nested list itself.
         if self.position == 2:
             self.floor += 1
-            self.position = 0 
+            self.position = 0
         else:
             self.position += 1
 

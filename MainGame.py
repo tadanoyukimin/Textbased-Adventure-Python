@@ -4,7 +4,7 @@ import DungeonMap
 import Battle
 import Enemy
 import Items
-
+import RoomDescription
 
 def start_game():
     player_stat_info, player_name = Player.character_creation()
@@ -17,20 +17,21 @@ def start_game():
     Player.player_character.initiative = player_stat_info[5]
     dungeon_map = DungeonMap.dungeon_map_second
 
-def player_action():
+def player_menu():
     while True:
         player_answer = int(input("What do you want to do?\n1: Move\n2: Examine\n3: Equip item\n4: Unequip item\n5: Inventory\n6: Save\n: Load\n>: "))
         if player_answer == 1:
             Player.player_character.move()
-        if player_answer == 2:
-            pass
-        if player_answer == 3:
+            Battle.encounter_check()
+        elif player_answer == 2:
+            RoomDescription.random_room_description()
+        elif player_answer == 3:
             Player.equip_item()
-        if player_answer == 4:
+        elif player_answer == 4:
             Player.unequip_item()
-        if player_answer == 5:
+        elif player_answer == 5:
             save_game()
-        if player_answer == 6:
+        elif player_answer == 6:
             load_game()
         else:
             "Please select from options provided."  
@@ -60,3 +61,6 @@ def load_game():
     Player.player_character.initiative = dict_load["playerinitiative"]
     Player.player_character.gold = dict_load["playergold"]
     Player.player_character.position = dict_load["playerposition"]
+
+def main():
+    player_menu()
