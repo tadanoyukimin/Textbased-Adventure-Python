@@ -64,3 +64,7 @@ def load_game():
 
 def main():
     player_menu()
+
+
+if __name__ == "__main__":
+    main()
