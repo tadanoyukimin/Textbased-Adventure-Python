@@ -1,3 +1,4 @@
+from os import error
 import pickle
 import Player
 import DungeonMap
@@ -7,17 +8,28 @@ import Items
 import RoomDescription
 import random
 
-
+def game_menu():
+    print("Welcome to the Textbased Adventure game made in Python.")
+    game = True
+    while game:
+        player_answer = input(
+            "What do you want to do?\n1. Start game\n2. Load game\n3. Exit game\n>: ").lower()
+        if player_answer == "start game":
+            start_game()
+            game = False
+        elif player_answer == "load game":
+            try:
+                load_game()
+                game = False
+            except Exception:
+                print("There is no save file. Please start a new game.")
+        elif player_answer == "exit game":
+            exit()
+        else:
+            print("Please select from the options given.")
+            
 def start_game():
-    player_stat_info, player_name = Player.character_creation()
-    Player.player_character.player = player_name
-    Player.player_character.hp = player_stat_info[0]
-    Player.player_character.hp = player_stat_info[1]
-    Player.player_character.mp = player_stat_info[2]
-    Player.player_character.attack = player_stat_info[3]
-    Player.player_character.defense = player_stat_info[4]
-    Player.player_character.initiative = player_stat_info[5]
-    dungeon_map = DungeonMap.dungeon_map_second
+    Player.character_creation()
 
 def player_menu():
     while True:
@@ -35,19 +47,21 @@ def player_menu():
             elif Battle.encounter_check() and enemy_num_encountered == 3:
                 Battle.battle(Enemy.zombie)
         elif player_answer == 2:
-            RoomDescription.random_room_description()
-            examined = True
-            if examined:
-                return "You have already examined this room."
+            examined = False
+            while not examined:
+                print(RoomDescription.random_room_description())
+                examined = True
+                if examined == True:
+                    print("You have already examined this room!")
         elif player_answer == 3:
             Player.equip_item()
         elif player_answer == 4:
             Player.unequip_item()
         elif player_answer == 5:
-            if not Player.player_character.inventory():
-                return "You have nothing in your inventory!"
+            if not Player.player_character.inventory:
+                print("You have nothing in your inventory!")
             else:
-                Player.player_character.check_inventory()
+                print(Player.player_character.check_inventory())
         elif player_answer == 6:
             save_game()
             print("You have successfully saved your game.")
@@ -83,8 +97,8 @@ def load_game():
     Player.player_character.position = dict_load["playerposition"]
 
 def main():
+    game_menu()
     player_menu()
-
 
 if __name__ == "__main__":
     main()

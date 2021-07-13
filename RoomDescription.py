@@ -17,5 +17,5 @@ boss_room_description = [
     "There is a sense of dread in the air..."
 ]
 def random_room_description():
-    random_num = random.randint(0, len(room_description_list))
+    random_num = random.randint(0, len(room_description_list) - 1)
     return room_description_list[random_num]

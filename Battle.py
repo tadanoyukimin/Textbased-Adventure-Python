@@ -41,7 +41,6 @@ def battle(enemy):
     while in_combat:
         while enemy.hp > 0:
             if Player.player_character.hp <=0:
-                print(Player.player_character.hp)
                 print("You died. GAME OVER.")
                 exit()
             else:
@@ -53,7 +52,6 @@ def battle(enemy):
                 elif player_action == 2:
                     player_defense = defend()
                     guard(enemy, player_defense)
-                    enemy_attack(enemy)
                 elif player_action == 3:
                     print("You flee successfully!")
                     in_combat = False
@@ -61,6 +59,11 @@ def battle(enemy):
                     print("Please select the correct option.")
 
         print("You have defeated the enemy.")
+        print(f"You have gained {enemy.gold} gold pieces from the {enemy.name}.")
+        if enemy.loot is None:
+            print(f"You obtained nothing from the {enemy.name}")
+        else:
+            print(f"You have obtained {enemy.loot} from the {enemy.name}.")
         Player.player_character.gold += enemy.gold
         Player.player_character.inventory.append(enemy.loot)
         in_combat = False 
