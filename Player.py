@@ -1,8 +1,6 @@
 import Items
 import copy
 import DungeonMap
-import numpy as np
-import random
 
 class Player():
     def __init__(self, name, player, hp, mp, attack, defense, initiative):
@@ -34,14 +32,14 @@ class Player():
         else:
             print("This is your inventory.")
             print("------------------------")
-            return f"{self.inventory}"
+            print(f"{self.inventory}")
 
     def check_equipment(self):
         print("This is your equipment.")
         print("------------------------")
-        return f"{self.equipment}"
+        print(f"{self.equipment}")
 
-#  Player action? 
+#  Player action? Will allow for different types of movement in later revision.
     def move(self):
         current_position = DungeonMap.dungeon_map_second[self.floor][self.position]
         #  This refers to [[0, 1, 2,]], [[0]]
@@ -49,14 +47,16 @@ class Player():
         if self.position == 2:
             self.floor += 1
             self.position = 0
+            print("You move to the next floor.")
         else:
             self.position += 1
+            print("You move to the next room.")
 
     def check_map(self):
         current_position = DungeonMap.dungeon_map_second[self.floor][self.position]
         print(f"Your current position is {current_position}.")
         map_copy = copy.copy(DungeonMap.dungeon_map_second)
-        return f"The map is \n{map_copy}."
+        print(f"The map is \n{map_copy}.")
 
 def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3] = Attack/Defense, [4] = Value
     player_answer = input("What item do you want to equip?(Please specify item name)> ").title()

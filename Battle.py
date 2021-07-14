@@ -11,7 +11,6 @@ def defend():
 
 def damage_enemy(encountered_enemy, player_damage):
     adjusted_damage = player_damage - encountered_enemy.defense
-    encountered_enemy_hp = encountered_enemy.hp
     encountered_enemy.hp -= adjusted_damage
     print(f"You hit the {encountered_enemy.name} for {adjusted_damage} damage!")
 
@@ -43,7 +42,7 @@ def battle(enemy):
                 print("You died. GAME OVER.")
                 exit()
             else:
-                player_action = input("What do you want to do?\nATTACK || DEFEND || FLEE\n>: ").lower()
+                player_action = input("What do you want to do?\n    ATTACK || DEFEND || HEAL\n>: ").lower()
                 if player_action == "attack":
                     player_attack = attack()
                     damage_enemy(enemy, player_attack)
@@ -51,10 +50,6 @@ def battle(enemy):
                 elif player_action == "defend":
                     player_defense = defend()
                     guard(enemy, player_defense)
-                elif player_action == "flee":
-                    in_combat = False
-                    print("You flee successfully!")
-                    break
                 else:
                     print("Please select the correct option.")
 

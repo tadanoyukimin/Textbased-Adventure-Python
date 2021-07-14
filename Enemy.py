@@ -29,8 +29,8 @@ def randomized_loot():
 
 
 #enemy list. HP, ATK, DEF, INI
-skeleton = Enemy("Skeleton", 30, 18, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.", False)
-zombie = Enemy("Zombie", 25, 20, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.", False)
+skeleton = Enemy("Skeleton", 30, 12, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.", False)
+zombie = Enemy("Zombie", 25, 13, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.", False)
 slime = Enemy("Slime", 20, 10, 1, 3, randomized_loot(), enemy_gold(), "A glob of monster liquid.", False)
 
 def revive_monster():  #  to stop battle from autobattling
