@@ -134,14 +134,14 @@ def unequip_item():
    
 #class resources. Always HP, MP, ATK, DEF, INITIATIVE
 classlist = ["Knight", "Spellcaster", "Ranger"]
-knight_stats = [100, 10, 10, 8, 3]
+knight_stats = [300, 10, 20, 8, 3]
 spellcaster_stats = [80, 30, 8, 4, 3]
 ranger_stats = [90, 15, 15, 7, 5]
 
 def character_creation():
     player_stats = [0, 0, 0, 0, 0]  #HP, MP, ATK, DEF, INITIATIVE.
     player_name = input("UNKNOWN VOICE: Please enter your name...:\n")
-
+    player_character.player = player_name.title()
     if player_name.strip() == "":
         player_name = "Anonymous"
 

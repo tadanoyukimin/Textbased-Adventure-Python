@@ -98,6 +98,9 @@ def boss_encounter_check():
     if Player.player_character.floor == 3 and Player.player_character.position == 2:
         print(f"You have entered the boss room...You have been attacked by {Enemy.balrog.name}!")
         Battle.battle(Enemy.balrog)
+        if Enemy.balrog.is_defeated == True:
+            print(f"Congratulations {Player.player_character.player}, you have defeated the boss! Now you can take your spoils and head home...")
+            exit()
 
 def save_game():
     dict_save = {
