@@ -54,6 +54,7 @@ def battle(enemy):
                 elif player_action == "flee":
                     in_combat = False
                     print("You flee successfully!")
+                    break
                 else:
                     print("Please select the correct option.")
 
@@ -65,4 +66,5 @@ def battle(enemy):
             print(f"You have obtained {enemy.loot} from the {enemy.name}.")
         Player.player_character.gold += enemy.gold
         Player.player_character.loot_item(enemy.loot)
+        enemy.is_defeated = True
         in_combat = False 

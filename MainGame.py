@@ -31,61 +31,70 @@ def game_menu():
 def start_game():
     Player.character_creation()
 
-def player_menu():  #  Might want to redo this code
+def help_command():
+    print("The following commands are available.")
+    print(
+        """
+        Move: Move your character to the next room, or if possible the next floor.
+        Examine: Examine the room you are currently in.
+        Inventory: Check your inventory.
+        Check Equipment: Check your equipment.
+        Equip: Equip an item from your inventory.
+        Unequip: Unequip an item from your inventory.
+        Save: Saves the game.
+        Load: Loads a save file.
+        """
+    )
+
+def game_commands():
+    dict_game_commands = {
+        "move": Player.player_character.move,
+        "inventory": Player.player_character.check_inventory,
+        "check equipment": Player.player_character.check_equipment,
+        "equip": Player.equip_item,
+        "unequip": Player.unequip_item,
+        "save": save_game,
+        "load": load_game,
+        "help": help_command,
+        "examine": RoomDescription.random_room_description,
+        "map": Player.player_character.check_map
+    }
+    examined = False
+    while True:
+        player_input = input("Enter help for a list of commands or if you want to view the list again. What do you want to do?\n:> ").lower()
+        if player_input in dict_game_commands:
+            try:
+                dict_game_commands[player_input]()
+                if player_input == "move":
+                    if Player.player_character.floor == 3 and Player.player_character.position == 2:
+                        boss_encounter_check()
+                    is_encounter = Battle.encounter_check()
+                    enemy_num = random.randint(0, 2)
+                    if is_encounter==True and enemy_num==0:
+                        print(f"You have been attacked by {Enemy.slime.name}!")
+                        Battle.battle(Enemy.slime)
+                        Enemy.revive_monster()
+                    elif is_encounter==True and enemy_num==1:
+                        print(f"You have been attacked by {Enemy.skeleton.name}!")
+                        Battle.battle(Enemy.skeleton)
+                        Enemy.revive_monster()
+                    elif is_encounter==True and enemy_num==2:
+                        print(f"You have been attacked by {Enemy.zombie.name}!")
+                        Battle.battle(Enemy.zombie)
+                        Enemy.revive_monster()
+                elif player_input == "examine":
+                    RoomDescription.random_room_description()
+                    examined = True
+                    if examined == True:
+                        print("You have already examined this room!")
+            except KeyError:
+                print("Unknown command, please check the help documentation.")
+        else: print("Unknown command, please check the help documentation.")
+
+def boss_encounter_check():
     if Player.player_character.floor == 3 and Player.player_character.position == 2:
-        print(Player.player_character.position)
         print(f"You have entered the boss room...You have been attacked by {Enemy.balrog.name}!")
         Battle.battle(Enemy.balrog)
-    else: 
-        examined = False
-        while True:
-            if Player.player_character.floor == 3 and Player.player_character.position == 2:
-                print(f"You have entered the boss room...You have been attacked by {Enemy.balrog.name}!")
-                Battle.battle(Enemy.balrog)
-            player_answer = int(input("What do you want to do?\n1: Move\n2: Examine\n3: Equip item\n4: Unequip item\n5: Inventory\n6: Save\n7: Load\n>: "))
-            if player_answer == 1:
-                Player.player_character.move()
-                print("You have moved to the next room.")
-                enemy_num_encountered = random.randint(0, 2)
-                encounter = Battle.encounter_check()
-                if (encounter == True and
-                        enemy_num_encountered == 0):
-                    print(f"You have been attacked by {Enemy.slime.name}!")
-                    Enemy.slime.hp = 20  #  Battle auto completes because the "new hp value" gets saved within the loop. Look at this code later again.
-                    Battle.battle(Enemy.slime)
-                elif (encounter == True and 
-                        enemy_num_encountered == 1):
-                    print(f"You have been attacked by {Enemy.skeleton.name}!")
-                    Enemy.skeleton.hp = 30
-                    Battle.battle(Enemy.skeleton)
-                elif (encounter == True and
-                        enemy_num_encountered == 2):
-                    print(f"You have been attacked by {Enemy.zombie.name}!")
-                    Enemy.zombie.hp = 25
-                    Battle.battle(Enemy.zombie)
-                else: pass
-            elif player_answer == 2:
-                if not examined:
-                    print(RoomDescription.random_room_description())
-                    examined = True
-                else:
-                    print("You have already examined this room!")
-            elif player_answer == 3:
-                Player.equip_item()
-            elif player_answer == 4:
-                Player.unequip_item()
-            elif player_answer == 5:
-                if not Player.player_character.inventory:
-                    print("You have nothing in your inventory!")
-                else:
-                    print(Player.player_character.check_inventory())
-            elif player_answer == 6:
-                save_game()
-                print("You have successfully saved your game.")
-            elif player_answer == 7:
-                load_game()
-            else:
-                "Please select from options provided."  
 
 def save_game():
     dict_save = {
@@ -115,7 +124,9 @@ def load_game():
 
 def main():
     game_menu()
-    player_menu()
+    help_command()
+    game_commands()
+
 
 if __name__ == "__main__":
     main()

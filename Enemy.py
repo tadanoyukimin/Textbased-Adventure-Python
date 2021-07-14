@@ -2,7 +2,7 @@ import random
 import Items
 
 class Enemy:
-    def __init__(self, name, hp, attack, defense, initiative, loot, gold, description):
+    def __init__(self, name, hp, attack, defense, initiative, loot, gold, description, is_defeated):
         self.name = name
         self.hp = hp
         self.attack = attack
@@ -11,6 +11,7 @@ class Enemy:
         self.loot = loot
         self.gold = gold
         self.description = description
+        self.is_defeated = is_defeated
 
 def enemy_gold():
     randomized_gold = random.randint(0, 30)
@@ -28,10 +29,20 @@ def randomized_loot():
 
 
 #enemy list. HP, ATK, DEF, INI
-skeleton = Enemy("Skeleton", 30, 18, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.")
-zombie = Enemy("Zombie", 25, 20, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.")
-slime = Enemy("Slime", 20, 10, 1, 3, randomized_loot(), enemy_gold(), "A glob of monster liquid.")
+skeleton = Enemy("Skeleton", 30, 18, 2, 2, randomized_loot(), enemy_gold(), "Spooky scary skeletons sends shivers down my spine.", False)
+zombie = Enemy("Zombie", 25, 20, 3, 2, randomized_loot(), enemy_gold(), "A walking corpse.", False)
+slime = Enemy("Slime", 20, 10, 1, 3, randomized_loot(), enemy_gold(), "A glob of monster liquid.", False)
 
+def revive_monster():  #  to stop battle from autobattling
+    if skeleton.is_defeated == True:
+        skeleton.hp = 30
+        skeleton.is_defeated = False
+    elif zombie.is_defeated == True:
+        zombie.hp = 25
+        zombie.is_defeated = False
+    elif slime.is_defeated == True:
+        slime.hp = 20
+        slime.is_defeated = False
 
 #Boss list. TO DO: BOSS LOOT TABLE
-balrog = Enemy("Balrog", 300, 50, 30, 3, randomized_loot(), boss_gold(), "A giant monster with two wings. I would run if I were you.")
+balrog = Enemy("Balrog", 300, 50, 30, 3, randomized_loot(), boss_gold(), "A giant monster with two wings. I would run if I were you.", False)
