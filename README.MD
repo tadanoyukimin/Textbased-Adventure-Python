@@ -7,7 +7,9 @@ A basic items class with a few items
 
 # Working on:
 Main Game
+
 Need to redo player_menu() due to bugs with enemy.hp. Breaking the loop down into smaller functions may be the way to go.
+
 Player contract consistency
 
 
