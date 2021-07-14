@@ -104,7 +104,7 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                     print(f"You have equipped the {equipment}.")
 
         except AttributeError:
-            return f"You failed to equip {equipment}."   
+            print(f"You failed to equip {equipment}.")   
 
 def unequip_item():
     print("This is your equipment.")
@@ -115,21 +115,21 @@ def unequip_item():
         player_character.attack -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Weapon"] = None
-        return f"You have unequipped the {equipped_item}."
+        print(f"You have unequipped the {equipped_item}.")
 
     elif equipped_item == player_character.equipment["Shield"]:
         player_character.defense -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Shield"] = None
-        return f"You have unequipped the {equipped_item}."
+        print(f"You have unequipped the {equipped_item}.")
 
     elif equipped_item == player_character.equipment["Armor"]:
         player_character.defense -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Armor"] = None
-        return f"You have unequipped the {equipped_item}."
+        print(f"You have unequipped the {equipped_item}.")
 
-    else: return "You failed to unequip anything."
+    else: print("You failed to unequip anything.")
 
    
 #class resources. Always HP, MP, ATK, DEF, INITIATIVE
