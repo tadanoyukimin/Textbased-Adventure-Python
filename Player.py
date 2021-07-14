@@ -25,6 +25,8 @@ class Player():
 
     def loot_item(self, item):
         self.inventory.append(item)
+        if item is None:
+            pass
 
     def check_inventory(self):
         if len(self.inventory) == 0:
@@ -32,12 +34,12 @@ class Player():
         else:
             print("This is your inventory.")
             print("------------------------")
-            print(f"{self.inventory}")
+            return f"{self.inventory}"
 
     def check_equipment(self):
         print("This is your equipment.")
         print("------------------------")
-        print(f"{self.equipment}")
+        return f"{self.equipment}"
 
 #  Player action? 
     def move(self):
@@ -57,7 +59,7 @@ class Player():
         return f"The map is \n{map_copy}."
 
 def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3] = Attack/Defense, [4] = Value
-    player_answer = input("What item do you want to equip?> ").title()
+    player_answer = input("What item do you want to equip?(Please specify item name)> ").title()
     for equipment in player_character.inventory:
         try:
             if player_answer == equipment:
@@ -72,7 +74,7 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                         player_character.inventory.pop(-1)
 
                     player_character.attack += Items.dict_item_stats[equipment][3]
-                    print(f"You have equipped a {equipment}.")
+                    print(f"You have equipped the {equipment}.")
 
                 if Items.dict_item_stats[equipment][1] == "Shield":
                     if player_character.equipment["Shield"] is None:
@@ -85,7 +87,7 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                         player_character.inventory.pop(-1)
 
                     player_character.defense += Items.dict_item_stats[equipment][3]
-                    print(f"You have equipped a {equipment}.")
+                    print(f"You have equipped the {equipment}.")
 
                 if Items.dict_item_stats[equipment][1] == "Armor":
 
@@ -99,7 +101,7 @@ def equip_item():  # [0] = Name, [1] = Item Category, [2] = Item description, [3
                         player_character.inventory.pop(-1)
 
                     player_character.defense += Items.dict_item_stats[equipment][3]
-                    print(f"You have equipped a {equipment}.")
+                    print(f"You have equipped the {equipment}.")
 
         except AttributeError:
             return f"You failed to equip {equipment}."   
@@ -113,28 +115,31 @@ def unequip_item():
         player_character.attack -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Weapon"] = None
+        return f"You have unequipped the {equipped_item}."
 
     elif equipped_item == player_character.equipment["Shield"]:
         player_character.defense -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Shield"] = None
+        return f"You have unequipped the {equipped_item}."
 
     elif equipped_item == player_character.equipment["Armor"]:
         player_character.defense -= Items.dict_item_stats[equipped_item][3]
         player_character.inventory.append(equipped_item)
         player_character.equipment["Armor"] = None
+        return f"You have unequipped the {equipped_item}."
 
-    else: pass
+    else: return "You failed to unequip anything."
 
    
 #class resources. Always HP, MP, ATK, DEF, INITIATIVE
 classlist = ["Knight", "Spellcaster", "Ranger"]
-knight_stats = [20, 10, 10, 8, 3]
-spellcaster_stats = [15, 30, 8, 4, 3]
-ranger_stats = [18, 15, 15, 7, 5]
+knight_stats = [100, 10, 10, 8, 3]
+spellcaster_stats = [80, 30, 8, 4, 3]
+ranger_stats = [90, 15, 15, 7, 5]
 
 def character_creation():
-    player_stats = [50, 0, 0, 0, 0]  #HP, MP, ATK, DEF, INITIATIVE. Base HP = 50
+    player_stats = [0, 0, 0, 0, 0]  #HP, MP, ATK, DEF, INITIATIVE.
     player_name = input("UNKNOWN VOICE: Please enter your name...:\n")
 
     if player_name.strip() == "":
@@ -149,21 +154,21 @@ def character_creation():
         if player_class in valid_class_choices:
             if player_class == "Knight":
                 player_stats = knight_stats
-                player_character.hp += player_stats[0]
+                player_character.hp = player_stats[0]
                 player_character.mp = player_stats[1]
                 player_character.attack = player_stats[2]
                 player_character.defense = player_stats[3]
                 player_character.initiative = player_stats[4]
             elif player_class == "Spellcaster":
                 player_stats = spellcaster_stats
-                player_character.hp += player_stats[0]
+                player_character.hp = player_stats[0]
                 player_character.mp = player_stats[1]
                 player_character.attack = player_stats[2]
                 player_character.defense = player_stats[3]
                 player_character.initiative = player_stats[4]
             elif player_class == "Ranger":
                 player_stats = ranger_stats
-                player_character.hp += player_stats[0]
+                player_character.hp = player_stats[0]
                 player_character.mp = player_stats[1]
                 player_character.attack = player_stats[2]
                 player_character.defense = player_stats[3]

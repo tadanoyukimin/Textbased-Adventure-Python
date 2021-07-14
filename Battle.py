@@ -1,6 +1,5 @@
 import random
 import Player
-import Items
 
 def attack():
     player_damage = Player.player_character.attack
@@ -12,6 +11,7 @@ def defend():
 
 def damage_enemy(encountered_enemy, player_damage):
     adjusted_damage = player_damage - encountered_enemy.defense
+    encountered_enemy_hp = encountered_enemy.hp
     encountered_enemy.hp -= adjusted_damage
     print(f"You hit the {encountered_enemy.name} for {adjusted_damage} damage!")
 
@@ -32,9 +32,8 @@ def encounter_check():
     no_encounter = Player.player_character.initiative
     yes_encounter = random.randint(0, 10)
     if yes_encounter > no_encounter:
-        print("You hear slight rumbling in the distance...")
-        print("You have been attacked!")
-        return yes_encounter
+        return yes_encounter > no_encounter
+    else: return False
 
 def battle(enemy):
     in_combat = True
@@ -44,17 +43,17 @@ def battle(enemy):
                 print("You died. GAME OVER.")
                 exit()
             else:
-                player_action = int(input("What do you want to do?\n1. Attack\n2. Guard\n3. Flee\n> "))
-                if player_action == 1:
+                player_action = input("What do you want to do?\nATTACK || DEFEND || FLEE\n>: ").lower()
+                if player_action == "attack":
                     player_attack = attack()
                     damage_enemy(enemy, player_attack)
                     enemy_attack(enemy)
-                elif player_action == 2:
+                elif player_action == "defend":
                     player_defense = defend()
                     guard(enemy, player_defense)
-                elif player_action == 3:
-                    print("You flee successfully!")
+                elif player_action == "flee":
                     in_combat = False
+                    print("You flee successfully!")
                 else:
                     print("Please select the correct option.")
 
@@ -65,5 +64,5 @@ def battle(enemy):
         else:
             print(f"You have obtained {enemy.loot} from the {enemy.name}.")
         Player.player_character.gold += enemy.gold
-        Player.player_character.inventory.append(enemy.loot)
+        Player.player_character.loot_item(enemy.loot)
         in_combat = False 
